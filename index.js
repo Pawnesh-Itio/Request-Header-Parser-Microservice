@@ -19,6 +19,12 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/api/whoami',function (req, res){
+  const acceptLanguage = req.headers['accept-language'];
+
+  res.json({ipaddress:req.ip,language:acceptLanguage,software:req.headers['user-agent']})
+});
+
 // your first API endpoint...
 app.get('/api/hello', function (req, res) {
   res.json({ greeting: 'hello API' });
@@ -26,5 +32,5 @@ app.get('/api/hello', function (req, res) {
 
 // listen for requests :)
 var listener = app.listen(process.env.PORT || 3000, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+  console.log('Your app is listening on port http://localhost:' + listener.address().port);
 });
